@@ -1,0 +1,33 @@
+<h2>Campaigns</h2>
+<form method="post">
+  {% csrf_token %}
+  <input type="text" name="subject" placeholder="Subject"><br>
+  <textarea name="message" placeholder="Message"></textarea><br>
+  <select name="email_list">
+    <option value="all">All Lists</option>
+    {% for list in email_lists %}
+      <option value="{{ list.id }}">{{ list.name }}</option>
+    {% endfor %}
+  </select>  
+  <button type="submit">Create Campaign</button>
+</form>
+
+<ul>
+  {% for c in campaigns %}
+  <li>
+    {{ c.subject }} ({{ c.email_list.name }}) -
+    {% if c.sent_at %}
+      Sent at: {{ c.sent_at }}
+    {% else %}
+      <a href="{% url 'send_campaign' c.id %}">Send</a>
+    {% endif %} |
+    <a href="{% url 'delete_campaign' c.id %}">Delete</a>
+  </li>
+{% endfor %}
+
+</ul>
+
+<a href="{% url 'home' %}">Home</a>
+
+
+

@@ -1,0 +1,30 @@
+# Byte-compiled / optimized files
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# Environment files
+.env
+.env.local
+
+# Logs & temp files
+*.log
+*.tmp
+
+# Ignore auto-generated migrations (except __init__.py)
+*/migrations/*.py
+*/migrations/__init__.py
+*/email_campaign/campaign/migrations/__init__.py
+
+# But keep specific migrations if needed (manually uncomment)
+# !*/migrations/0001_initial.py

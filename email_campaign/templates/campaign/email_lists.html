@@ -1,0 +1,19 @@
+<h2>Email Lists</h2>
+<form method="post">
+  {% csrf_token %}
+  <input type="text" name="name" placeholder="List name">
+  <button type="submit">Add</button>
+</form>
+
+<ul>
+  {% for list in email_lists %}
+  <li>
+    {{ list.name }} -
+    <a href="{% url 'subscribers' list.id %}">View</a> |
+    <a href="{% url 'delete_email_list' list.id %}">Delete</a>
+  </li>
+{% endfor %}
+
+</ul>
+
+<a href="{% url 'home' %}">Home</a>

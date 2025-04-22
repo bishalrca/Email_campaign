@@ -1,0 +1,18 @@
+<h2>Subscribers - {{ email_list.name }}</h2>
+<form method="post">
+  {% csrf_token %}
+  <input type="email" name="email" placeholder="Email">
+  <button type="submit">Add</button>
+</form>
+
+<ul>
+    {% for sub in email_list.subscriber_set.all %}
+      <li>
+        {{ sub.email }} -
+        <a href="{% url 'delete_subscriber' sub.id %}">Delete</a>
+      </li>
+    {% endfor %}
+  </ul>
+  
+
+<a href="{% url 'email_lists' %}">Back to Lists</a>
