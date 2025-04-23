@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from .models import EmailList, Subscriber, Campaign
 from .utility import send_campaign_emails
-from django.views.generic.edit import DeleteView
+from django.views.generic.edit import DeleteView, BaseUpdateView, UpdateView
 
 
 class HomeView(TemplateView):
@@ -26,6 +26,14 @@ class DeleteEmailListView(DeleteView):
     template_name = 'campaign/confirm_delete.html'    
 
 
+class EditEmailListView(UpdateView):
+    model = EmailList
+    fields = ['name']
+    template_name = 'campaign/email_list_edit.html'
+    success_url = '/email-lists/'
+           
+
+
 class SubscriberView(View):
     def get(self, request, list_id):
         email_list = get_object_or_404(EmailList, pk=list_id)
@@ -37,6 +45,18 @@ class SubscriberView(View):
         Subscriber.objects.create(email=email, email_list=email_list)
         return redirect('subscribers', list_id=list_id)
     
+
+    
+class EditSubscriberView(UpdateView):
+    model = Subscriber
+    fields = ['email']  
+    template_name = 'campaign/subscriber_edit.html'
+    success_url = '/email-lists/'  
+
+    
+    def form_valid(self, form):
+        return super().form_valid(form)    
+       
 class DeleteSubscriberView(DeleteView):
     model = Subscriber
     template_name = 'campaign/confirm_delete.html'
