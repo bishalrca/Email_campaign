@@ -9,7 +9,8 @@
     {% for sub in email_list.subscriber_set.all %}
       <li>
         {{ sub.email }} -
-        <a href="{% url 'delete_subscriber' sub.id %}">Delete</a>
+        <a href="{% url 'delete_subscriber' sub.id %}">Delete</a> |
+        <a href="{% url  'edit_subscriber' sub.id %}">Edit</a>
       </li>
     {% endfor %}
   </ul>
