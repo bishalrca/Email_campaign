@@ -10,7 +10,8 @@
   <li>
     {{ list.name }} -
     <a href="{% url 'subscribers' list.id %}">View</a> |
-    <a href="{% url 'delete_email_list' list.id %}">Delete</a>
+    <a href="{% url 'delete_email_list' list.id %}">Delete</a> |
+    <a href="{% url 'edit_email_list' pk=list.id  %}">Edit</a> |
   </li>
 {% endfor %}
 
